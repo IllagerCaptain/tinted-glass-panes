@@ -34,8 +34,8 @@ public class TintedGlassPanes implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		Registry.register(Registries.BLOCK, new Identifier("tinted_glass_panes", "tinted_glass_pane"), TINTED_GLASS_PANE);
-		Registry.register(Registries.ITEM, new Identifier("tinted_glass_panes", "tinted_glass_pane"), TINTED_GLASS_PANE_ITEM);
+		Registry.register(Registries.BLOCK, Identifier.of("tinted_glass_panes", "tinted_glass_pane"), TINTED_GLASS_PANE);
+		Registry.register(Registries.ITEM, Identifier.of("tinted_glass_panes", "tinted_glass_pane"), TINTED_GLASS_PANE_ITEM);
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(content -> content.addAfter(Items.GLASS_PANE, TINTED_GLASS_PANE_ITEM));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.addAfter(Items.TINTED_GLASS, TINTED_GLASS_PANE_ITEM));
 	}
