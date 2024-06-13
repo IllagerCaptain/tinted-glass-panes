@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "tinted_glass_panes",
+	"version": "${version}",
+	"name": "Tinted Glass Panes",
+	"description": "The lack of this item gives me pane. §o(get it? im so funny..)",
+	"authors": [
+		"IllagerCaptain"
+	],
+	"contact": {
+		"issues": "https://github.com/IllagerCaptain/tinted-glass-panes/issues",
+		"sources": "https://github.com/IllagerCaptain/tinted-glass-panes"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"icon": "assets/tinted_glass_panes/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.tinted_glass_panes.TintedGlassPanes"
+		],
+		"client": [
+			"com.tinted_glass_panes.TintedGlassPanesClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.15.10",
+		"minecraft": "~1.20.6",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	},
+	"custom": {
+	    "modmenu": {
+    		"update_checker": true
+	    }
+    }
+}
