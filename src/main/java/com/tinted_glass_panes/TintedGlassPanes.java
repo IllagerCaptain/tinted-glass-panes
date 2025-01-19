@@ -12,30 +12,49 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
 
 public class TintedGlassPanes implements ModInitializer {
+	static Identifier TINTED_GLASS_PANE_IDENTIFIER = Identifier.of("tinted_glass_panes", "tinted_glass_pane");
+
 	public static class TintedGlassPaneBlock extends PaneBlock {
 		public TintedGlassPaneBlock(Settings settings) {
 			super(settings);
 		}
 
 		@Override
-		public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
+		public int getOpacity(BlockState state) {
 			return 15;
 		}
 	}
 
-	public static final Block TINTED_GLASS_PANE = new TintedGlassPaneBlock(Block.Settings.create().strength(0.3f).sounds(BlockSoundGroup.GLASS));
-	public static final Item TINTED_GLASS_PANE_ITEM = new BlockItem(TINTED_GLASS_PANE, new Item.Settings());
+	public static final RegistryKey<Block> TINTED_GLASS_PANE_KEY = RegistryKey.of(
+			RegistryKeys.BLOCK,
+			TINTED_GLASS_PANE_IDENTIFIER
+	);
+
+	public static final RegistryKey<Item> TINTED_GLASS_PANE_ITEM_KEY = RegistryKey.of(
+			RegistryKeys.ITEM,
+			TINTED_GLASS_PANE_IDENTIFIER
+	);
+
+	public static final Block TINTED_GLASS_PANE = Registry.register(
+			Registries.BLOCK,
+			TINTED_GLASS_PANE_KEY,
+			new TintedGlassPaneBlock(Block.Settings.create().strength(0.3f).sounds(BlockSoundGroup.GLASS).registryKey(TINTED_GLASS_PANE_KEY))
+	);
+
+	public static final Item TINTED_GLASS_PANE_ITEM = Registry.register(
+			Registries.ITEM,
+			TINTED_GLASS_PANE_ITEM_KEY,
+			new BlockItem(TINTED_GLASS_PANE, new Item.Settings().useBlockPrefixedTranslationKey().registryKey(TINTED_GLASS_PANE_ITEM_KEY))
+	);
 
 	@Override
 	public void onInitialize() {
-		Registry.register(Registries.BLOCK, Identifier.of("tinted_glass_panes", "tinted_glass_pane"), TINTED_GLASS_PANE);
-		Registry.register(Registries.ITEM, Identifier.of("tinted_glass_panes", "tinted_glass_pane"), TINTED_GLASS_PANE_ITEM);
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.COLORED_BLOCKS).register(content -> content.addAfter(Items.GLASS_PANE, TINTED_GLASS_PANE_ITEM));
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> content.addAfter(Items.TINTED_GLASS, TINTED_GLASS_PANE_ITEM));
 	}

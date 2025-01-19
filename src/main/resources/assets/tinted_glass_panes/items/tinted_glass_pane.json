@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "tinted_glass_panes:item/tinted_glass_pane"
+  }
+}
